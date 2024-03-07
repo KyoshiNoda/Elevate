@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "./authActions";
+import { loginUser, registerUser, googleSignIn } from "./authActions";
 
 const userFromStorage = localStorage.getItem("user");
 const tokenFromStorage = localStorage.getItem("token");
@@ -22,6 +22,9 @@ const authSlice = createSlice({
       state.error = null;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+    },
+    updateUserDetails: (state, action) => {
+      state.user = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -54,9 +57,24 @@ const authSlice = createSlice({
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.loading = false;
         state.error = payload;
+      })
+      .addCase(googleSignIn.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(googleSignIn.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user = payload.data.user;
+        state.token = payload.data.token;
+        localStorage.setItem("user", JSON.stringify(payload.data.user));
+        localStorage.setItem("token", payload.data.token);
+      })
+      .addCase(googleSignIn.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload;
       });
   },
 });
 
 export default authSlice.reducer;
-export const { logout } = authSlice.actions;
+export const { logout, updateUserDetails } = authSlice.actions;
