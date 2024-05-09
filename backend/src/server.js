@@ -14,7 +14,7 @@ const gptRoute = require("./routes/gptRoute.js");
 const cloudinary = require("cloudinary").v2;
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 cloudinary.config({
   cloud_name: `${process.env.CLOUDINARY_NAME}`,
   api_key: `${process.env.CLOUDINARY_API_KEY}`,
