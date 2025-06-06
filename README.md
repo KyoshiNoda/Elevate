@@ -1,4 +1,4 @@
-# Full Stack Fitness App - Senior Project
+# Full Stack Fitness App
 ## About The Project
 The Full Stack Fitness App is a dynamic platform designed to support fitness enthusiasts in tracking and enhancing their exercise and dietary habits. It combines functionality for logging workouts and meals, accessing workout videos and nutritional information, earning achievements, comparing social stats, and finding local gyms.
 
